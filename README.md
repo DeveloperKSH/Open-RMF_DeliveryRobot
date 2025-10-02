@@ -73,9 +73,9 @@ flowchart LR
   Nav2 -->|Result / Feedback| FSM
   Fleet_Adapter -->|RobotState| RMF_Server
   FSM --> Bridges
-  FSM --> Cognito
+  FSM --> Cognito  
 
----  
+---
 
 ## 🚀 4. RMF Robot Client 실행 가이드 (Docker Compose)
 
