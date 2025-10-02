@@ -81,6 +81,7 @@ flowchart LR
 ## 🚀 4. RMF Robot Client 실행 가이드 (Docker Compose)
 
 본 문서는 **로봇단(Client) 코드**를 Docker Compose 기반으로 실행하기 위한 절차를 설명합니다.  
+
 `sim`, `nav2`, `fsm` 세 가지 서비스를 중심으로 빌드 및 실행 과정을 따라 하면 됩니다.
 
 ---
@@ -88,6 +89,7 @@ flowchart LR
 ### 🧱 1. Build
 
 먼저 컨테이너 이미지를 빌드합니다.  
+
 서비스별로 나눠 빌드할 수 있으며, 최초 1회만 실행하면 됩니다.
 
 ```bash
