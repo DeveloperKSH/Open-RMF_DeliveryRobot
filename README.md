@@ -36,27 +36,27 @@
 ## 3. 🏗️ 코드 구성 및 역할
 ```mermaid
 flowchart LR
-  subgraph Control[관제 / 서버]
-    RMF_Server[RMF Core / Server]
+  subgraph Control
+    RMF_Server["RMF Core / Server"]
   end
 
-  subgraph RobotSide[로봇 단]
-    Fleet_Adapter[fleet_robot (Fleet Adapter)]
-    FSM[fsm_waypoint (FSM)]
-    Nav2[Navigation2 Stack]
-    Robot[물류 로봇]
+  subgraph RobotSide
+    Fleet_Adapter["fleet_robot / Fleet Adapter"]
+    FSM["fsm_waypoint Node"]
+    Nav2["Navigation2 Stack"]
+    Robot["물류 로봇"]
   end
 
-  subgraph External[외부 연계]
-    Bridges[MQTT / Socket.IO Bridge]
-    Cognito[WebSocket Control]
+  subgraph External
+    Bridges["MQTT / Socket.IO Bridge"]
+    Cognito["WebSocket Control"]
   end
 
   RMF_Server -- PathRequest --> Fleet_Adapter
   Fleet_Adapter --> FSM
   FSM -->|Action Client| Nav2
-  Nav2 -->|TF/Odom| Robot
-  Nav2 -->|Result/Feedback| FSM
+  Nav2 -->|TF / Odom| Robot
+  Nav2 -->|Result / Feedback| FSM
   Fleet_Adapter -->|RobotState| RMF_Server
   FSM --> Bridges
   FSM --> Cognito
