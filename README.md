@@ -37,11 +37,10 @@
 ```mermaid
 flowchart LR
   RMF_Server[RMF Core / Server] -- PathRequest --> Fleet_Adapter[fleet_robot]
-  Fleet_Adapter -->|Action API| Nav2[Navigation2 Stack]
-  Nav2 -->|TF/Odom| Robot[물류 로봇]
-
-  Fleet_Adapter -->|RobotState| RMF_Server
   Fleet_Adapter --> FSM[fsm_waypoint Node]
-
+  FSM -->|Action Client| Nav2[Navigation2 Stack]
+  Nav2 -->|TF/Odom| Robot[물류 로봇]
+  Nav2 --> FSM  %% 피드백/리포트
+  Fleet_Adapter -->|RobotState| RMF_Server
   FSM --> Bridges[MQTT / Socket.IO Bridge]
   FSM --> Cognito[WebSocket Control]
