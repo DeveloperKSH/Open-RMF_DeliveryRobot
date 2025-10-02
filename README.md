@@ -78,7 +78,7 @@ flowchart LR
 
 ---
 
-## 🚀 4. RMF Robot Client 실행 가이드 (Docker Compose)
+## 🚀 4. RMF Robot Client 실행 가이드  
 
 본 문서는 **로봇단(Client) 코드**를 Docker Compose 기반으로 실행하기 위한 절차를 설명합니다.  
 
