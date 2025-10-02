@@ -86,7 +86,7 @@ flowchart LR
 
 ---
 
-### 🧱 1. Build
+### 🧱 (1) 이미지 빌드
 
 먼저 컨테이너 이미지를 빌드합니다.  
 
@@ -95,3 +95,54 @@ flowchart LR
 ```bash
 docker compose build iron    # ROS 2 Iron / Nav2 기반 이미지
 docker compose build rmf     # RMF(sim 등) 관련 이미지
+```
+
+---
+
+### ▶️ (2) 환경 준비
+
+- **X11 표시 권한 부여**  
+
+GUI 또는 시뮬레이터 실행 시 호스트의 X 서버 접근을 허용해야 합니다.  
+
+리눅스 환경에서 다음 명령어를 실행합니다.  
+
+```bash
+xhost +    # 보안을 고려한다면: xhost +local:
+```
+
+- **.env 파일 생성 및 작성**  
+
+컨테이너 실행에 필요한 환경변수를 `.env` 파일로 관리합니다.  
+
+리포지토리 루트 디렉토리에서 다음 명령어로 `.env` 파일을 생성합니다.  
+
+```bash
+touch .env
+# Example
+ROS_DOMAIN_ID=123
+DISPLAY=0
+CONFIG_FILE=/root/ws/src/rmf_demos/config/office/tinyRobot_with_nav2_config.yaml  # ← 중요: 실제 환경에 맞게 수정
+```
+
+- **모델 리소스 배치**  
+
+시뮬레이터 실행 시 필요한 모델 리소스를 프로젝트 루트에 배치해야 합니다.  
+
+전달받은 `models.tar.gz` 파일을 `Open-RMF_DeliveryRobot` 루트 폴더에 위치시킵니다.  
+
+---
+
+### 🚀 (3) 실행
+
+필요한 서비스만 지정하여 실행할 수 있습니다.  
+
+여기서는 `sim`, `nav2`, `fsm` 세 서비스를 함께 실행합니다.  
+
+```bash
+# 포그라운드 실행 (로그를 바로 확인 가능)
+docker compose up sim nav2 fsm
+
+# 백그라운드 실행 (로그는 별도로 확인)
+docker compose up -d sim nav2 fsm
+```
