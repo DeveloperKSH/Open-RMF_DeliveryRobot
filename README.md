@@ -74,6 +74,7 @@ flowchart LR
   Fleet_Adapter -->|RobotState| RMF_Server
   FSM --> Bridges
   FSM --> Cognito  
+```
 
 ---
 
