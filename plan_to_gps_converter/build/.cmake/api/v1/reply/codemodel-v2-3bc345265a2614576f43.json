@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-6ef85b61941b092c8eb2.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "plan_to_gps_converter",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "plan_to_gps_converter_node::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-plan_to_gps_converter_node-Debug-f02c2aab087a453c3144.json",
+					"name" : "plan_to_gps_converter_node",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "plan_to_gps_converter_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-plan_to_gps_converter_uninstall-Debug-3e7f0c70501052b35155.json",
+					"name" : "plan_to_gps_converter_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-Debug-fcd08d5bd17ea09a1dcf.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/zeta/check_nav2/src/plan_to_gps_converter/build",
+		"source" : "/home/zeta/check_nav2/src/plan_to_gps_converter"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}
