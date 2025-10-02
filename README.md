@@ -16,7 +16,7 @@
 ---
 
 ## 🔧 2. 시스템 구성
-로봇 단(Client)에서는 다음과 같은 구성 요소로 동작합니다:
+로봇단(Client)에서는 다음과 같은 구성 요소로 동작합니다:
 
 - **로봇 어댑터 (`fleet_adapter`)**  
   - RMF Server가 내려주는 작업/경로(PathRequest)을 Nav2 명령으로 변환  
@@ -74,3 +74,21 @@ flowchart LR
   Fleet_Adapter -->|RobotState| RMF_Server
   FSM --> Bridges
   FSM --> Cognito
+
+---  
+
+## 🚀 4. RMF Robot Client 실행 가이드 (Docker Compose)
+
+본 문서는 **로봇단(Client) 코드**를 Docker Compose 기반으로 실행하기 위한 절차를 설명합니다.  
+`sim`, `nav2`, `fsm` 세 가지 서비스를 중심으로 빌드 및 실행 과정을 따라 하면 됩니다.
+
+---
+
+### 🧱 1. Build
+
+먼저 컨테이너 이미지를 빌드합니다.  
+서비스별로 나눠 빌드할 수 있으며, 최초 1회만 실행하면 됩니다.
+
+```bash
+docker compose build iron    # ROS 2 Iron / Nav2 기반 이미지
+docker compose build rmf     # RMF(sim 등) 관련 이미지
