@@ -50,7 +50,7 @@
 ## 🔀 3. 시스템 아키텍처 & 데이터 흐름
 ```mermaid
 flowchart LR
-  subgraph Control
+  subgraph Server
     RMF_Server["rmf_server"]
   end
 
