@@ -28,4 +28,4 @@ jobs:
     - name: pycodestyle
       shell: bash
       run: |
-        pycodestyle .
+        pycodestyle --config=setup.cfg .
