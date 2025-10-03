@@ -54,7 +54,7 @@ flowchart LR
     RMF_Server["rmf_server"]
   end
 
-  subgraph RobotSide
+  subgraph Client
     Fleet_Adapter["fleet_adapter"]
     FSM["fsm_waypoint_node"]
     Nav2["navigation2_stack"]
