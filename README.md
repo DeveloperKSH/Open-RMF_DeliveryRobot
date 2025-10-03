@@ -3,7 +3,7 @@
 본 저장소는 **Open-RMF 기반 다중 로봇 관제 시스템**에서 실제 로봇(Client) 측 코드를 담당하는 패키지 모음입니다.  
 
 - **역할**: RMF Server가 내려주는 작업/경로를 수신하여 FSM을 통해 Nav2 주행 스택으로 실행  
-- **구성**: 로봇 어댑터(Fleet Adapter), 상태 기계(FSM), 주행 스택(Navigation2 Stack), 외부 브리지(MQTT/Socket.IO), Docker 환경  
+- **구성**: 로봇 어댑터(Fleet Adapter), 상태 기계(FSM), 주행 스택(Navigation2 Stack), 외부 브릿지(MQTT/Socket.IO), Docker 환경  
 - **활용**: 실외 배달로봇 다중 운영 및 관제 시스템에 적용  
 
 ---
@@ -35,7 +35,7 @@
     - Controller: **RotationShim + Regulated Pure Pursuit**  
     - Behavior Tree: `navigate_to_pose_w_replanning_and_recovery.xml` (Stop & Go 로직)
 
-- **외부 브리지 (`rmf_demos_bridges`)**  
+- **외부 브릿지 (`rmf_demos_bridges`)**  
   - MQTT/Socket.IO를 통한 클라우드 및 외부 모니터링 연계  
   - 텔레메트리 데이터를 외부 시스템에 전달  
 
