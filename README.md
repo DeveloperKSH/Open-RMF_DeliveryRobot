@@ -50,30 +50,45 @@
 ## 🔀 3. 시스템 아키텍처 & 데이터 흐름
 ```mermaid
 flowchart LR
-  subgraph Server
-    RMF_Server["rmf_server"]
+  %% ==== Subgraphs ====
+  subgraph S[Server]
+    rmf_server[rmf_server]
   end
 
-  subgraph Client
-    Fleet_Adapter["fleet_adapter"]
-    FSM["fsm_waypoint_node"]
-    Nav2["navigation2_stack"]
-    Robot["배달로봇"]
+  subgraph C[Client]
+    fleet_adapter[fleet_adapter]
+    fsm[fsm_waypoint_node]
+    nav2[navigation2_stack]
+    robot[배달로봇]
   end
 
-  subgraph External
-    Bridges["MQTT / Socket.IO Bridge"]
-    Cognito["WebSocket Control"]
+  subgraph E[External]
+    bridge[MQTT / Socket.IO Bridge]
+    ws[WebSocket Control]
   end
 
-  RMF_Server -- PathRequest --> Fleet_Adapter
-  Fleet_Adapter --> FSM
-  FSM -->|Action Client| Nav2
-  Nav2 -->|TF / Odom| Robot
-  Nav2 -->|Result / Feedback| FSM
-  Fleet_Adapter -->|RobotState| RMF_Server
-  FSM --> Bridges
-  FSM --> Cognito  
+  %% ==== Server <-> Client (Adapter) ====
+  rmf_server -->|PathRequest| fleet_adapter
+  fleet_adapter -->|RobotState| rmf_server
+
+  %% ==== Adapter <-> FSM ====
+  fleet_adapter <-->|Task Dispatch / FSM Status| fsm
+
+  %% ==== FSM <-> Nav2 (ROS 2 Action) ====
+  fsm <-->|Goal / Feedback / Result| nav2
+
+  %% ==== Nav2 <-> Robot (저수준 제어/센서) ====
+  nav2 -->|cmd_vel| robot
+  robot -->|TF / Odom / Sensors| nav2
+
+  %% ==== FSM <-> External ====
+  %% WebSocket
+  ws -->|Control Command| fsm
+  fsm -->|Status / Telemetry| ws
+
+  %% MQTT / Socket.IO Bridge
+  bridge -->|Commands / Config| fsm
+  fsm -->|Status / Events / Telemetry| bridge
 ```
 
 ---
