@@ -33,7 +33,7 @@
   - 실외 환경에 맞게 커스텀  
     - Planner: **StraightLine** (직선 경로 최적화)
     - Controller: **RotationShim + Regulated Pure Pursuit**  
-    - Behavior Tree: `navigate_to_pose_w_replanning_and_recovery.xml` (Stop & Go)
+    - Behavior Tree: `navigate_to_pose_w_replanning_and_recovery.xml` (Stop & Go 로직)
 
 - **외부 브리지 (`rmf_demos_bridges`)**  
   - MQTT/Socket.IO를 통한 클라우드 및 외부 모니터링 연계  
