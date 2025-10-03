@@ -1,6 +1,6 @@
 # RMF Robot Client (Fleet Adapter & FSM)
 
-본 저장소는 **Open-RMF 기반 다중 로봇 관제 시스템**에서 실제 로봇(Client) 측 코드를 담당하는 패키지 모음입니다.  
+본 저장소는 **Open-RMF 기반 다중 로봇 관제 시스템**에서 **로봇(Client)** 측 코드를 담당하는 패키지 모음입니다.  
 
 - **역할**: RMF Server가 내려주는 작업/경로를 수신하여 FSM을 통해 Nav2 주행 스택으로 실행  
 - **구성**: 로봇 어댑터(Fleet Adapter), 상태 기계(FSM), 주행 스택(Navigation2 Stack), 외부 브릿지(MQTT/Socket.IO), Docker 환경  
@@ -78,7 +78,7 @@ flowchart LR
 
 ---
 
-## 🚀 4. RMF Robot Client 실행 가이드  
+## 🚀 4. RMF Robot 실행 가이드  
 
 본 문서는 **로봇단(Client) 코드**를 Docker Compose 기반으로 실행하기 위한 절차를 설명합니다.  
 
