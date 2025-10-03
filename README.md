@@ -50,45 +50,45 @@
 ## 🔀 3. 시스템 아키텍처 & 데이터 흐름
 ```mermaid
 flowchart LR
-  %% ==== Subgraphs ====
-  subgraph S[Server]
-    rmf_server[rmf_server]
+  %% ----- Server Core -----
+  subgraph Core["Server"]
+    rmfcore["rmf_core"]
+    fm["fleet_manager"]
   end
 
-  subgraph C[Client]
-    fleet_adapter[fleet_adapter]
-    fsm[fsm_waypoint_node]
-    nav2[navigation2_stack]
-    robot[배달로봇]
+  %% ----- External (robot viewpoint) -----
+  subgraph Ext["External"]
+    bridge["MQTT / Socket.IO Bridge"]
   end
 
-  subgraph E[External]
-    bridge[MQTT / Socket.IO Bridge]
-    ws[WebSocket Control]
+  %% ----- Monitoring -----
+  subgraph Mon["Monitoring"]
+    dash["rmf_web"]
+    panel["rmf_panel"]
+    rviz["rviz(satellite)"]
   end
 
-  %% ==== Server <-> Client (Adapter) ====
-  rmf_server -->|PathRequest| fleet_adapter
-  fleet_adapter -->|RobotState| rmf_server
+  %% ----- Robot Clients -----
+  subgraph Clients["Client"]
+    adapter["fleet_adapter"]
+  end
 
-  %% ==== Adapter <-> FSM ====
-  fleet_adapter <-->|Task Dispatch / FSM Status| fsm
+  %% Server internals (양방향: 서로 다른 라벨로 분리)
+  fm -->|Command / TaskReq| rmfcore
+  rmfcore -->|Plan / Schedule / Status| fm
 
-  %% ==== FSM <-> Nav2 (ROS 2 Action) ====
-  fsm <-->|Goal / Feedback / Result| nav2
+  %% Core ↔ External (주로 코어 -> 브리지)
+  rmfcore -->|ROS Topics: robot / fleet / task| bridge
 
-  %% ==== Nav2 <-> Robot (저수준 제어/센서) ====
-  nav2 -->|cmd_vel| robot
-  robot -->|TF / Odom / Sensors| nav2
+  %% Monitoring
+  bridge -->|Socket.IO events| dash          
+  panel -->|TaskReq| rmfcore                 
+  rmfcore -->|Status / Summaries| panel      
+  rmfcore -->|ROS Topics: map / tf / robot| rviz   
 
-  %% ==== FSM <-> External ====
-  %% WebSocket
-  ws -->|Control Command| fsm
-  fsm -->|Status / Telemetry| ws
-
-  %% MQTT / Socket.IO Bridge
-  bridge -->|Commands / Config| fsm
-  fsm -->|Status / Events / Telemetry| bridge
+  %% Server ↔ Robot
+  fm -->|PathRequest / Activity| adapter
+  adapter -->|RobotState / Nav feedback| fm
 ```
 
 ---
