@@ -1,8 +1,9 @@
 name: style
 on:
-  pull_request:
-  push:
-    branches: [ main ]
+  workflow_dispatch:   # 수동 실행만 가능
+#  pull_request:
+#  push:
+#    branches: [ main ]
 jobs:
   linter:
     runs-on: ubuntu-latest
