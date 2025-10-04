@@ -88,7 +88,7 @@ flowchart LR
 
   %% Server ↔ Robot
   fm -->|PathRequest / Activity| adapter
-  adapter -->|RobotState / Nav feedback| fm
+  adapter -->|RobotState / Feedback| fm
 ```
 
 ---
