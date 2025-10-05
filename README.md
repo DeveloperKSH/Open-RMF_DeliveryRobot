@@ -70,14 +70,16 @@ flowchart LR
   end
 
   %% ==== Server <-> Client (Adapter) ====
-  rmf_server -->|PathRequest| fleet_adapter
-  fleet_adapter -->|RobotState| rmf_server
+  rmf_server -->|PathRequest / Activity| fleet_adapter
+  fleet_adapter -->|RobotState / Feedback| rmf_server
 
   %% ==== Adapter <-> FSM ====
-  fleet_adapter <-->|Task Dispatch / FSM Status| fsm
+  fleet_adapter -->|Task Dispatch| fsm
+  fsm -->|Status / Result| fleet_adapter
 
   %% ==== FSM <-> Nav2 (ROS 2 Action) ====
-  fsm <-->|Goal / Feedback / Result| nav2
+  fsm -->|Action Command| nav2
+  nav2 -->|Goal / Feedback / Result| fsm
 
   %% ==== Nav2 <-> Robot (저수준 제어/센서) ====
   nav2 -->|cmd_vel| robot
